@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
      1. PARTICLE / STAR FIELD CANVAS
      ══════════════════════════════════ */
   const canvas = document.getElementById('particle-canvas');
-  const ctx    = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
   let particles = [];
   let W, H;
 
   function resizeCanvas() {
-    W = canvas.width  = window.innerWidth;
+    W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
   resizeCanvas();
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
   class Particle {
     constructor() { this.reset(true); }
     reset(init = false) {
-      this.x    = Math.random() * W;
-      this.y    = init ? Math.random() * H : -10;
-      this.r    = Math.random() * 1.6 + 0.3;
-      this.vx   = (Math.random() - 0.5) * 0.3;
-      this.vy   = Math.random() * 0.4 + 0.1;
+      this.x = Math.random() * W;
+      this.y = init ? Math.random() * H : -10;
+      this.r = Math.random() * 1.6 + 0.3;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = Math.random() * 0.4 + 0.1;
       this.alpha = Math.random() * 0.7 + 0.2;
       this.pulse = Math.random() * Math.PI * 2;
       this.pulseSpeed = Math.random() * 0.02 + 0.005;
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw() {
       const a = this.alpha * (0.7 + 0.3 * Math.sin(this.pulse));
       const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-      const color  = isDark
+      const color = isDark
         ? `rgba(165,180,252,${a})`
         : `rgba(99,102,241,${a * 0.5})`;
       ctx.beginPath();
@@ -55,14 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
   class ShootingStar {
     constructor() { this.reset(); }
     reset() {
-      this.x     = Math.random() * W;
-      this.y     = Math.random() * H * 0.5;
-      this.len   = Math.random() * 80 + 40;
+      this.x = Math.random() * W;
+      this.y = Math.random() * H * 0.5;
+      this.len = Math.random() * 80 + 40;
       this.speed = Math.random() * 6 + 4;
       this.angle = Math.PI / 4;
       this.alpha = 1;
       this.active = false;
-      this.timer  = Math.random() * 8000 + 4000;
+      this.timer = Math.random() * 8000 + 4000;
     }
     activate() { this.active = true; this.alpha = 1; }
     update() {
@@ -154,13 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
      4. HAMBURGER MENU
      ══════════════════════════════════ */
   const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('nav-links');
+  const navLinks = document.getElementById('nav-links');
   hamburger.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     const [s1, s2, s3] = hamburger.querySelectorAll('span');
     if (open) {
       s1.style.transform = 'translateY(7px) rotate(45deg)';
-      s2.style.opacity   = '0';
+      s2.style.opacity = '0';
       s3.style.transform = 'translateY(-7px) rotate(-45deg)';
     } else {
       [s1, s2, s3].forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
@@ -225,8 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.querySelectorAll('.stat-num').forEach(el => {
-          const raw      = parseFloat(el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, ''));
-          const suffix   = el.getAttribute('data-suffix') || '';
+          const raw = parseFloat(el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, ''));
+          const suffix = el.getAttribute('data-suffix') || '';
           const decimals = parseInt(el.getAttribute('data-decimals') || '0');
           animateCounter(el, raw, decimals, suffix);
         });
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const type = setInterval(() => {
       if (i < text.length) {
         // Handle HTML entity
-        if (text.slice(i, i+5) === '&amp;') {
+        if (text.slice(i, i + 5) === '&amp;') {
           subtitle.textContent += '&';
           i += 5;
         } else {
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ══════════════════════════════════ */
   let mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX / window.innerWidth  - 0.5;
+    mouseX = e.clientX / window.innerWidth - 0.5;
     mouseY = e.clientY / window.innerHeight - 0.5;
   });
   function updateOrbs() {
@@ -291,8 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.project-card:not(.view-all-card)').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 12;
-      const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 12;
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
       card.style.transform = `translateY(-5px) rotateX(${-y}deg) rotateY(${x}deg)`;
       card.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
     });
@@ -308,32 +308,26 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ══════════════════════════════════
      11. CONTACT FORM
      ══════════════════════════════════ */
-  const form      = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('contact-submit-btn');
+  const form = document.getElementById('contact-form');
+
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const name    = document.getElementById('contact-name').value.trim();
-      const email   = document.getElementById('contact-email').value.trim();
-      const message = document.getElementById('contact-message').value.trim();
-      if (!name || !email || !message) return;
 
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.8';
-
-      // Simulated send, wire up to EmailJS / Formspree / your backend
-      setTimeout(() => {
-        submitBtn.textContent = 'Message Sent!';
-        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-        submitBtn.style.opacity = '1';
-        form.reset();
-        setTimeout(() => {
-          submitBtn.textContent = 'Send Message';
-          submitBtn.style.background = '';
-          submitBtn.disabled = false;
-        }, 3500);
-      }, 1500);
+      emailjs.send("service_64yrcag", "template_iu8n6s4", {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        subject: document.getElementById('contact-subject').value,
+        message: document.getElementById('contact-message').value
+      })
+        .then(() => {
+          alert("Message sent successfully!");
+          form.reset();
+        })
+        .catch((error) => {
+          alert("Failed to send message.");
+          console.error(error);
+        });
     });
   }
 
@@ -357,14 +351,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.blog-card').forEach(card => {
     card.addEventListener('click', (e) => {
       const ripple = document.createElement('span');
-      const rect   = card.getBoundingClientRect();
+      const rect = card.getBoundingClientRect();
       Object.assign(ripple.style, {
         position: 'absolute',
         width: '6px', height: '6px',
         borderRadius: '50%',
         background: 'rgba(99,102,241,0.35)',
         left: `${e.clientX - rect.left - 3}px`,
-        top:  `${e.clientY - rect.top  - 3}px`,
+        top: `${e.clientY - rect.top - 3}px`,
         transform: 'scale(0)',
         animation: 'ripple 0.6s ease-out forwards',
         pointerEvents: 'none',
