@@ -26,20 +26,30 @@
       font-family: 'Inter', system-ui, sans-serif;
       color: var(--text);
       background-color: #f3f4f6;
-      line-height: 1.5;
+      line-height: 1.4;
+      font-size: 13.5px;
       padding: 2rem 0;
       -webkit-font-smoothing: antialiased;
     }
 
     .resume-container {
       width: 210mm; /* A4 Width */
-      min-height: 297mm; /* A4 Height */
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .resume-page {
+      width: 100%;
+      height: 297mm; /* A4 Height */
       background-color: #ffffff;
-      padding: 20mm;
+      padding: 10mm 15mm 12mm 15mm;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       border-radius: 8px;
       position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     /* Actions panel (print button) */
@@ -95,8 +105,8 @@
     header {
       text-align: center;
       border-bottom: 2px solid var(--border);
-      padding-bottom: 0.6rem;
-      margin-bottom: 1.2rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.8rem;
     }
 
     h1 {
@@ -152,8 +162,8 @@
       letter-spacing: 0.05em;
       border-bottom: 1px solid var(--primary-light);
       padding-bottom: 0.2rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.8rem;
+      margin-top: 0.9rem;
+      margin-bottom: 0.45rem;
     }
 
     .summary-text {
@@ -184,7 +194,7 @@
 
     /* Experience Details */
     .exp-item {
-      margin-bottom: 1rem;
+      margin-bottom: 0.65rem;
     }
 
     .exp-header {
@@ -219,7 +229,7 @@
       position: relative;
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.15rem;
       text-align: justify;
     }
 
@@ -268,7 +278,7 @@
       position: relative;
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
     }
 
     .awards-list li::before {
@@ -300,11 +310,33 @@
       line-height: 1.45;
     }
 
+    /* Page Footer (page numbers) */
+    .page-footer {
+      position: absolute;
+      bottom: 5mm;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 0.3rem;
+      margin: 0 15mm;
+    }
+
     /* Print styling rules */
     @media print {
+      @page {
+        size: A4;
+        margin: 0; /* Hides default browser header/footers completely */
+      }
+
       body {
         background-color: #ffffff;
+        margin: 0;
         padding: 0;
+        font-size: 8.2pt;
+        line-height: 1.3;
       }
 
       .actions-panel {
@@ -312,11 +344,35 @@
       }
 
       .resume-container {
-        width: 100%;
-        min-height: 0;
+        width: 210mm;
+        margin: 0;
         padding: 0;
         box-shadow: none;
         border-radius: 0;
+        gap: 0;
+      }
+
+      .resume-page {
+        width: 210mm;
+        height: 297mm;
+        padding: 8mm 15mm 10mm 15mm;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-after: always;
+        break-after: page;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
+
+      .resume-page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      .page-footer {
+        margin: 0 15mm;
+        bottom: 4mm;
       }
 
       .contact-info a {
@@ -324,7 +380,53 @@
         color: var(--text-muted) !important;
       }
 
-      /* Force page breaks/containment to keep things to 2 pages or clean spacing */
+      /* Compact styling for print to fit 2 pages perfectly */
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.1rem;
+      }
+      .subtitle {
+        font-size: 1.0rem;
+        margin-bottom: 0.3rem;
+      }
+      header {
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+      }
+      .section-title {
+        font-size: 0.95rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.4rem;
+        padding-bottom: 0.15rem;
+      }
+      .exp-item {
+        margin-bottom: 0.6rem;
+      }
+      .bullet-list li {
+        font-size: 0.8rem;
+        margin-bottom: 0.15rem;
+      }
+      .awards-list li {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+      }
+      .skills-grid {
+        gap: 0.3rem 1.5rem;
+      }
+      .other-jobs, .other-awards, .comm-list {
+        font-size: 0.8rem;
+        line-height: 1.35;
+      }
+      .edu-item {
+        margin-bottom: 0.3rem;
+      }
+      .edu-header {
+        font-size: 0.9rem;
+      }
+      .edu-details {
+        font-size: 0.8rem;
+      }
+
       h2 {
         page-break-after: avoid;
       }
@@ -352,141 +454,155 @@
   <!-- A4 RESUME SHEET -->
   <main class="resume-container">
     
-    <!-- HEADER -->
-    <header>
-      <h1>Tisha Chawlani</h1>
-      <div class="subtitle">Software Engineer &amp; AI Specialist</div>
-      <div class="contact-info">
-        <a href="mailto:tishachawlani95@gmail.com">tishachawlani95@gmail.com</a> | 
-        <span>+91-6261371431</span> | 
-        <a href="https://linkedin.com/in/tishachawlani" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/Tisha717" target="_blank">GitHub</a>
-      </div>
-    </header>
+    <!-- PAGE 1 -->
+    <div class="resume-page" id="page-1">
+      <!-- HEADER -->
+      <header>
+        <h1>Tisha Chawlani</h1>
+        <div class="subtitle">Software Engineer &amp; AI Specialist</div>
+        <div class="contact-info">
+          <a href="mailto:tishachawlani95@gmail.com">tishachawlani95@gmail.com</a> | 
+          <span>+91-6261371431</span> | 
+          <a href="https://linkedin.com/in/tishachawlani" target="_blank">LinkedIn</a> | 
+          <a href="https://github.com/Tisha717" target="_blank">GitHub</a>
+        </div>
+      </header>
 
-    <!-- PROFESSIONAL SUMMARY -->
-    <section>
-      <h2 class="section-title">Professional Summary</h2>
-      <p class="summary-text">
-        Highly motivated and award-winning Software Engineer specializing in AI development, Multi-Agent systems, and DevOps. Proven track record of building intelligent, automated solutions (ranging from Agentic ITSM workflows to HR goal generation tools) and managing CI/CD platform operations for Fortune 500 clients. Recognized as a Google WE Scholar (Top 1%) and an IET India Scholarship National Finalist.
-      </p>
-    </section>
+      <!-- PROFESSIONAL SUMMARY -->
+      <section>
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary-text">
+          Highly motivated and award-winning Software Engineer specializing in AI development, Multi-Agent systems, and DevOps. Proven track record of building intelligent, automated solutions (ranging from Agentic ITSM workflows to HR goal generation tools) and managing CI/CD platform operations for Fortune 500 clients. Recognized as a Google WE Scholar (Top 1%) and an IET India Scholarship National Finalist.
+        </p>
+      </section>
 
-    <!-- EDUCATION -->
-    <section>
-      <h2 class="section-title">Education</h2>
-      <div class="edu-item">
-        <div class="edu-header">
-          <span>Amity University Chhattisgarh</span>
-          <span>Graduation: 2025</span>
+      <!-- EDUCATION -->
+      <section>
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+          <div class="edu-header">
+            <span>Amity University Chhattisgarh</span>
+            <span>Graduation: 2025</span>
+          </div>
+          <div class="edu-details">
+            <strong>B.Tech in Computer Science &amp; Engineering (Data Science)</strong>
+            <span>CGPA: 9.1/10</span>
+          </div>
+          <div class="edu-details" style="font-size: 0.8rem; font-style: italic; margin-top: 0.05rem;">
+            Recipient of the Academic Silver Medal and the university's highest student honor: Shri Baljit Shastri Award.
+          </div>
         </div>
-        <div class="edu-details">
-          <strong>B.Tech in Computer Science &amp; Engineering (Data Science)</strong>
-          <span>CGPA: 9.1/10</span>
-        </div>
-        <div class="edu-details" style="font-size: 0.8rem; font-style: italic; margin-top: 0.05rem;">
-          Recipient of the Academic Silver Medal and the university's highest student honor: Shri Baljit Shastri Award.
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PROFESSIONAL EXPERIENCE -->
-    <section>
-      <h2 class="section-title">Professional Experience</h2>
-      
-      <!-- CAPGEMINI -->
-      <div class="exp-item">
-        <div class="exp-header">
-          <span><span class="company-name">Capgemini</span> · <span class="role-title">Software Engineer</span></span>
-          <span class="exp-date">Oct 2025 - Present</span>
+      <!-- PROFESSIONAL EXPERIENCE (PART 1) -->
+      <section>
+        <h2 class="section-title">Professional Experience</h2>
+        
+        <!-- CAPGEMINI -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <span><span class="company-name">Capgemini</span> · <span class="role-title">Software Engineer</span></span>
+            <span class="exp-date">Oct 2025 - Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Starbucks Platform DevOps Team:</strong> Currently allocated to the Starbucks platform DevOps team. Responsibilities include managing enterprise-grade infrastructure, CI/CD pipelines, SPN rotations, Apigee API Gateways, Front Door, APIM configurations, and data loading/offboarding operations for high-priority platform services (DeepBrew, EDAP).</li>
+            <li><strong>Banner Health ITSM Workflow POC:</strong> Developed an end-to-end agentic AI workflow on the Amplifier platform (with ServiceNow AI Studio exploration) for Tomcat service tickets. Used Python and scikit-learn for Pearson correlation and NLP frequency analysis (showing -0.81 correlation between assignment group and resolution time), guiding the design of a optimized, semi-autonomous 5-agent pipeline that automates ticket routing, resolution drafting, and closure.</li>
+            <li><strong>GetSUCCESS Priority Autopilot:</strong> Engineered an internal multi-agent AI assistant using Streamlit, Microsoft AutoGen (3 specialized agents), and Llama 3.3 via Groq to auto-generate personalized, accurately weighted annual goals for HR systems, with session data persisted in a local SQLite database.</li>
+            <li><strong>Smart Resume Screening Platform:</strong> Built an end-to-end recruiter search and screening engine using FastAPI, Azure AI Search semantic ranking, spaCy skill extraction, and DeepSeek LLM for interview preparation workflows during the 3-month Capgemini training period.</li>
+            <li><strong>L&amp;D Nexus:</strong> Developed L&amp;D Nexus, a full-stack AI-powered learning and development application utilizing FastAPI and React (Vite) with Recharts batch analytics and a LangChain, HuggingFace, and FAISS-based RAG pipeline to query organizational knowledge bases.</li>
+          </ul>
         </div>
-        <ul class="bullet-list">
-          <li><strong>Starbucks Platform DevOps Team:</strong> Currently allocated to the Starbucks platform DevOps team. Responsibilities include managing enterprise-grade infrastructure, CI/CD pipelines, SPN rotations, Apigee API Gateways, Front Door, APIM configurations, and data loading/offboarding operations for high-priority platform services (DeepBrew, EDAP).</li>
-          <li><strong>Banner Health ITSM Workflow POC:</strong> Developed an end-to-end agentic AI workflow on the Amplifier platform (with ServiceNow AI Studio exploration) for Tomcat service tickets. Used Python and scikit-learn for Pearson correlation and NLP frequency analysis (showing -0.81 correlation between assignment group and resolution time), guiding the design of a optimized, semi-autonomous 5-agent pipeline that automates ticket routing, resolution drafting, and closure.</li>
-          <li><strong>GetSUCCESS Priority Autopilot:</strong> Engineered an internal multi-agent AI assistant using Streamlit, Microsoft AutoGen (3 specialized agents), and Llama 3.3 via Groq to auto-generate personalized, accurately weighted annual goals for HR systems, with session data persisted in a local SQLite database.</li>
-          <li><strong>Smart Resume Screening Platform:</strong> Built an end-to-end recruiter search and screening engine using FastAPI, Azure AI Search semantic ranking, spaCy skill extraction, and DeepSeek LLM for interview preparation workflows during the 3-month Capgemini training period.</li>
-          <li><strong>L&amp;D Nexus:</strong> Developed L&amp;D Nexus, a full-stack AI-powered learning and development application utilizing FastAPI and React (Vite) with Recharts batch analytics and a LangChain, HuggingFace, and FAISS-based RAG pipeline to query organizational knowledge bases.</li>
+      </section>
+
+      <div class="page-footer">Page 1 of 2</div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="resume-page" id="page-2">
+      <!-- PROFESSIONAL EXPERIENCE (PART 2) -->
+      <section style="margin-top: 0;">
+
+        <!-- GLOBALLY RECRUIT -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <span><span class="company-name">Globally Recruit</span> · <span class="role-title">University Relations Associate</span></span>
+            <span class="exp-date">Apr 2025 - Sep 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Streamlined representative travel, operational engagement dashboards, and partnerships for the Catholic University of America.</li>
+            <li>Coordinated student acquisition, education fairs engagement, and virtual sessions for Saint Louis University.</li>
+          </ul>
+        </div>
+
+        <!-- EXCELERATE -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <span><span class="company-name">Excelerate</span> · <span class="role-title">AI Data Analyst &amp; Prompt Researcher</span></span>
+            <span class="exp-date">Feb 2025 - Mar 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>Churn Analysis &amp; Retention Modelling:</strong> Led a team of 12 to conduct EDA, hypothesis testing, and machine learning models (Random Forest, SVM, Decision Tree, Logistic Regression) on 8,500+ student engagement records, achieving a 99.7% model accuracy.</li>
+            <li><strong>Prompt Engineering Roadmaps:</strong> Led a team of 6 researching LLM prompting strategies across Google Gemini, Hugging Face, and OpenAI, developing structured comparisons and integration blueprints.</li>
+          </ul>
+        </div>
+
+        <!-- BRIEF OTHERS -->
+        <div class="other-jobs">
+          <strong>Additional Professional Experience:</strong><br>
+          ✦ <strong>Math AI Trainer</strong> (Outlier, Sep 2024 - Nov 2024): Evaluated LLM mathematical reasoning, prompt optimization, and error analysis.<br>
+          ✦ <strong>Analyst</strong> (AmPm Overseas, Jun 2024 - Nov 2024): Supported UK market expansion using CRM data segmentation.<br>
+          ✦ <strong>Data Analyst Intern</strong> (NoQs Digital, May 2023 - Aug 2023): Automated workflows using Google Sheets API, reducing manual effort by 60%.
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
+        <div class="skills-grid">
+          <div class="skills-category">
+            <strong>Languages:</strong> Python, Java, SQL, HTML, CSS, JavaScript
+          </div>
+          <div class="skills-category">
+            <strong>AI &amp; Data:</strong> Pandas, NumPy, scikit-learn, TensorFlow, NLP
+          </div>
+          <div class="skills-category">
+            <strong>Frameworks &amp; Tools:</strong> Microsoft AutoGen, FastAPI, Power BI, Git
+          </div>
+          <div class="skills-category">
+            <strong>DevOps &amp; Cloud:</strong> Azure DevOps, Azure AI Search, Apigee, APIM
+          </div>
+        </div>
+      </section>
+
+      <!-- HONORS & AWARDS -->
+      <section>
+        <h2 class="section-title">Selected Honors &amp; Awards</h2>
+        <ul class="awards-list">
+          <li><strong>Google WE Scholar (TalentSprint &amp; Google):</strong> Top 1% national selection out of 27,000+ applicants for the Women Engineers Program. Completed 2 years of rigorous technical and leadership development under Google mentors, attended a 15-day workshop at IIIT Hyderabad, and visited the Google office.</li>
+          <li><strong>IET India Scholarship Runner-Up 2024:</strong> Selected as a Top 10 National Finalist and East &amp; North East Zone Runner-Up (2nd Prize) out of 65,000+ applicants; presented GreenGrow Hub sustainability solution at Calcutta University.</li>
+          <li><strong>Harvard HPAIR Delegate 2023:</strong> Selected as a delegate for the Harvard Project for Asian and International Relations Conference at Harvard University, focusing on global leadership.</li>
+          <li><strong>Shri Baljit Shastri Award &amp; Silver Medal:</strong> Received highest student honor of Amity University and the Convocation Silver Medal presented by the Hon'ble Governor of Chhattisgarh.</li>
+          <li><strong>Smart India Hackathon:</strong> Winner of university internal round (2023), representing Amity with an AI chatbot for the Namami Gange Mission at the national level. Finalist participant in 2022.</li>
+          <li><strong>Best &amp; Star Performer:</strong> Recognized as Best Performer (Prompt Engineering) and Star Performer across Excelerate internships in collaboration with Rochester Institute of Technology (RIT).</li>
         </ul>
-      </div>
-
-      <!-- GLOBALLY RECRUIT -->
-      <div class="exp-item">
-        <div class="exp-header">
-          <span><span class="company-name">Globally Recruit</span> · <span class="role-title">University Relations Associate</span></span>
-          <span class="exp-date">Apr 2025 - Sep 2025</span>
+        <div class="other-awards">
+          <strong>Other Recognitions:</strong> AnitaB.org Advancing Inclusion Scholar (Grace Hopper Celebration India 2024) | Infosys Pragati Cohort 3 Leadership Invitee | SheFi Scholar Season 12 | Perspektywy Women in Tech Summit Attendee (2023) | G100 WEF &amp; WICCI Invitee (2022)
         </div>
-        <ul class="bullet-list">
-          <li>Streamlined representative travel, operational engagement dashboards, and partnerships for the Catholic University of America.</li>
-          <li>Coordinated student acquisition, education fairs engagement, and virtual sessions for Saint Louis University.</li>
-        </ul>
-      </div>
+      </section>
 
-      <!-- EXCELERATE -->
-      <div class="exp-item">
-        <div class="exp-header">
-          <span><span class="company-name">Excelerate</span> · <span class="role-title">AI Data Analyst &amp; Prompt Researcher</span></span>
-          <span class="exp-date">Feb 2025 - Mar 2025</span>
+      <!-- VOLUNTEERING & COMMUNITY -->
+      <section style="margin-bottom: 0;">
+        <h2 class="section-title">Community &amp; Leadership</h2>
+        <div class="comm-list">
+          ✦ <strong>Google Developer Student Clubs (GDSC) Lead</strong> (Jul 2022 - Aug 2023): Led core team of 10+, hosted 12+ tech workshops for university students.<br>
+          ✦ <strong>Newton School Coding Club President</strong> (Jul 2022 - Jul 2023): Coordinated programming contests and training sessions for 100+ members.<br>
+          ✦ <strong>TFUG &amp; ML Durg Core Member:</strong> Delivered speaking sessions and technical tutorials during Machine Learning Study Jams.<br>
+          ✦ <strong>Organizing Member:</strong> DevFest Raipur 2022 and Durg FOSS 2023.
         </div>
-        <ul class="bullet-list">
-          <li><strong>Churn Analysis &amp; Retention Modelling:</strong> Led a team of 12 to conduct EDA, hypothesis testing, and machine learning models (Random Forest, SVM, Decision Tree, Logistic Regression) on 8,500+ student engagement records, achieving a 99.7% model accuracy.</li>
-          <li><strong>Prompt Engineering Roadmaps:</strong> Led a team of 6 researching LLM prompting strategies across Google Gemini, Hugging Face, and OpenAI, developing structured comparisons and integration blueprints.</li>
-        </ul>
-      </div>
+      </section>
 
-      <!-- BRIEF OTHERS -->
-      <div class="other-jobs">
-        <strong>Additional Professional Experience:</strong><br>
-        ✦ <strong>Math AI Trainer</strong> (Outlier, Sep 2024 - Nov 2024): Evaluated LLM mathematical reasoning, prompt optimization, and error analysis.<br>
-        ✦ <strong>Analyst</strong> (AmPm Overseas, Jun 2024 - Nov 2024): Supported UK market expansion using CRM data segmentation.<br>
-        ✦ <strong>Data Analyst Intern</strong> (NoQs Digital, May 2023 - Aug 2023): Automated workflows using Google Sheets API, reducing manual effort by 60%.
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section>
-      <h2 class="section-title">Skills &amp; Technologies</h2>
-      <div class="skills-grid">
-        <div class="skills-category">
-          <strong>Languages:</strong> Python, Java, SQL, HTML, CSS, JavaScript
-        </div>
-        <div class="skills-category">
-          <strong>AI &amp; Data:</strong> Pandas, NumPy, scikit-learn, TensorFlow, NLP
-        </div>
-        <div class="skills-category">
-          <strong>Frameworks &amp; Tools:</strong> Microsoft AutoGen, FastAPI, Power BI, Git
-        </div>
-        <div class="skills-category">
-          <strong>DevOps &amp; Cloud:</strong> Azure DevOps, Azure AI Search, Apigee, APIM
-        </div>
-      </div>
-    </section>
-
-    <!-- HONORS & AWARDS -->
-    <section>
-      <h2 class="section-title">Selected Honors &amp; Awards</h2>
-      <ul class="awards-list">
-        <li><strong>Google WE Scholar (TalentSprint &amp; Google):</strong> Top 1% national selection out of 27,000+ applicants for the Women Engineers Program. Completed 2 years of rigorous technical and leadership development under Google mentors, attended a 15-day workshop at IIIT Hyderabad, and visited the Google office.</li>
-        <li><strong>IET India Scholarship Runner-Up 2024:</strong> Selected as a Top 10 National Finalist and East &amp; North East Zone Runner-Up (2nd Prize) out of 65,000+ applicants; presented GreenGrow Hub sustainability solution at Calcutta University.</li>
-        <li><strong>Harvard HPAIR Delegate 2023:</strong> Selected as a delegate for the Harvard Project for Asian and International Relations Conference at Harvard University, focusing on global leadership.</li>
-        <li><strong>Shri Baljit Shastri Award &amp; Silver Medal:</strong> Received highest student honor of Amity University and the Convocation Silver Medal presented by the Hon'ble Governor of Chhattisgarh.</li>
-        <li><strong>Smart India Hackathon:</strong> Winner of university internal round (2023), representing Amity with an AI chatbot for the Namami Gange Mission at the national level. National finalist participant in 2022.</li>
-        <li><strong>Best &amp; Star Performer:</strong> Recognized as Best Performer (Prompt Engineering) and Star Performer across Excelerate internships in collaboration with Rochester Institute of Technology (RIT).</li>
-      </ul>
-      <div class="other-awards">
-        <strong>Other Recognitions:</strong> AnitaB.org Advancing Inclusion Scholar (Grace Hopper Celebration India 2024) | Infosys Pragati Cohort 3 Leadership Invitee | SheFi Scholar Season 12 | Perspektywy Women in Tech Summit Attendee (2023) | G100 WEF &amp; WICCI Invitee (2022)
-      </div>
-    </section>
-
-    <!-- VOLUNTEERING & COMMUNITY -->
-    <section>
-      <h2 class="section-title">Community &amp; Leadership</h2>
-      <div class="comm-list">
-        ✦ <strong>Google Developer Student Clubs (GDSC) Lead</strong> (Jul 2022 - Aug 2023): Led core team of 10+, hosted 12+ tech workshops for university students.<br>
-        ✦ <strong>Newton School Coding Club President</strong> (Jul 2022 - Jul 2023): Coordinated programming contests and training sessions for 100+ members.<br>
-        ✦ <strong>TFUG &amp; ML Durg Core Member:</strong> Delivered speaking sessions and technical tutorials during Machine Learning Study Jams.<br>
-        ✦ <strong>Organizing Member:</strong> DevFest Raipur 2022 and Durg FOSS 2023.
-      </div>
-    </section>
+      <div class="page-footer">Page 2 of 2</div>
+    </div>
 
   </main>
 
